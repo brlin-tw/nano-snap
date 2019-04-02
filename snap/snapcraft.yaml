@@ -14,8 +14,8 @@
 # For support refer to the snapcraft section in the Snapcraft Forum:
 # https://forum.snapcraft.io/c/snapcraft
 
-name: nano
-summary: Small, friendly text editor inspired by Pico
+name: nano-strict
+summary: Small, friendly text editor (Strict Confinement)
 description: |
   GNU nano is an easy-to-use text editor originally designed as a replacement
   for Pico, the ncurses-based editor from the non-free mailer package Pine
@@ -35,7 +35,21 @@ description: |
     - toggling features while running
     - and full internationalization support
 
-  This snap is maintained by the Snapcrafters community and is not endorsed or officially maintained by the upstream developers.
+  This snap ships GNU nano in strict confinement mode, this means that it can only access non-directly-under-hidden-files under your home directory and (optionally) files under `/mnt` and `/media` via the `removable-media` interface, however in contrast with the `nano` snap it is installable in Ubuntu Core systems.
+
+  Run the following command in a terminal to create an alias of the `tree` command after installing the snap:
+
+      sudo snap alias nano-strict nano
+
+  Note that if you just removed nano from APT distribution you will have to run the following command to regenerate GNU Bash's command search hash so that it will fall back to the command provided by the snap:
+
+      hash -r
+
+  simply logout and re-login the user session will work.
+
+  This is NOT an official nano distribution, refer the issue tracker for any problems regarding the use of this snap:
+
+  https://bugs.launchpad.net/nano-snap
 
 icon: snap/gui/nano.png
 
@@ -46,7 +60,7 @@ confinement: classic
 grade: stable
 
 apps:
-  nano:
+  nano-strict:
     adapter: full
     command: bin/nano
     command-chain: &common_cmd_chain
