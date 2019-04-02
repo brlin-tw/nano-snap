@@ -56,7 +56,7 @@ icon: snap/gui/nano.png
 #version: determined-by-adopt-info
 adopt-info: nano
 base: core
-confinement: classic
+confinement: strict
 grade: stable
 
 apps:
@@ -64,7 +64,6 @@ apps:
     adapter: full
     command: bin/nano
     command-chain: &common_cmd_chain
-    - bin/classic-launch
     - bin/locales-launch
     - bin/magic-launch
     - bin/ncurses-launch
@@ -105,13 +104,6 @@ parts:
       #'*': assets/patches/
     #prime:
     #- -*
-
-  # Launcher to set up the usual snap runtime environment
-  # https://forum.snapcraft.io/t/the-classic-launch-stage-snap/10441
-  classic-launch:
-    plugin: nil
-    stage-snaps:
-    - classic-launch
 
   # Launcher for fixing libmagic applications
   # https://forum.snapcraft.io/t/the-magic-launch-launcher-stage-snap/10442
