@@ -16,7 +16,8 @@ init(){
 		last_upstream_release_version \
 		last_snapped_release_version \
 		upstream_version \
-		packaging_revision
+		packaging_revision \
+		some_place_under_the_project_repo
 
 	snapcraftctl pull
 
@@ -73,9 +74,21 @@ init(){
 		| sed s/^v//
 	)"
 
+	# WORKAROUND:
+	#   Allow fetching project revision in multipass build
+	#   environment, which uses out-of-tree build and packaging
+	#   source tree repo location can't be determined via environment
+	#   Unable to determine project version info in multipass build environment - snapcraft - snapcraft.io
+	#   https://forum.snapcraft.io/t/unable-to-determine-project-version-info-in-multipass-build-environment/10416
+	if test -d /root/project; then
+		some_place_under_the_project_repo=/root/project
+	else
+		some_place_under_the_project_repo=..
+	fi
+
 	packaging_revision="$(
 		git \
-			-C .. \
+			-C "${some_place_under_the_project_repo}" \
 			describe \
 			--abbrev=4 \
 			--always \
