@@ -45,8 +45,9 @@ init(){
 			| tail --lines=1
 	)"
 
+	# Allow the `snap info` command to fail (due to unpublished status)
 	last_snapped_release_version="$(
-		snap info "${SNAPCRAFT_PROJECT_NAME}" \
+		snap info "${SNAPCRAFT_PROJECT_NAME}" || true \
 			| awk '$1 == "stable:" { print $2 }' \
 			| cut --delimiter=+ --fields=1
 	)"
