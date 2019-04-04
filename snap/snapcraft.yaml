@@ -159,3 +159,7 @@ apps:
     command: bin/rnano
     command-chain: *common_cmd_chain
     environment: *common_env
+
+plugs:
+  home:
+  removable-media: # Non A/C
