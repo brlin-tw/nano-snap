@@ -161,5 +161,15 @@ apps:
     environment: *common_env
 
 plugs:
+  # Regular files access
   home:
   removable-media: # Non A/C
+
+  # Configuration access
+  personal-files:
+    read:
+    - $HOME/.config/nano
+    - $HOME/.nanorc
+  system-files:
+    read:
+    - /etc/nanorc
