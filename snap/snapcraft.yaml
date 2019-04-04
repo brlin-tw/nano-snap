@@ -59,24 +59,6 @@ base: core
 confinement: strict
 grade: stable
 
-apps:
-  nano-strict:
-    adapter: full
-    command: bin/nano
-    command-chain: &common_cmd_chain
-    - bin/locales-launch
-    - bin/magic-launch
-    - bin/ncurses-launch
-    - bin/nano-launch
-    environment: &common_env
-      SNAP_ARCH_TRIPLET: $SNAPCRAFT_ARCH_TRIPLET
-
-  rnano:
-    adapter: full
-    command: bin/rnano
-    command-chain: *common_cmd_chain
-    environment: *common_env
-
 parts:
   # Utility programs to help with packaging
   utilities:
@@ -159,3 +141,21 @@ parts:
     - libncursesw5
     organize:
       snap/$SNAPCRAFT_PROJECT_NAME/current: /
+
+apps:
+  nano-strict:
+    adapter: full
+    command: bin/nano
+    command-chain: &common_cmd_chain
+    - bin/locales-launch
+    - bin/magic-launch
+    - bin/ncurses-launch
+    - bin/nano-launch
+    environment: &common_env
+      SNAP_ARCH_TRIPLET: $SNAPCRAFT_ARCH_TRIPLET
+
+  rnano:
+    adapter: full
+    command: bin/rnano
+    command-chain: *common_cmd_chain
+    environment: *common_env
