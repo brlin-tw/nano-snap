@@ -37,7 +37,7 @@ description: |
 
   This snap ships GNU nano in strict confinement mode, this means that it can only access non-directly-under-hidden-files under your home directory and (optionally) files under `/mnt` and `/media` via the `removable-media` interface, however in contrast with the `nano` snap it is installable in Ubuntu Core systems.
 
-  Run the following command in a terminal to create an alias of the `tree` command after installing the snap:
+  Run the following command in a terminal to create an alias of the `nano` command after installing the snap:
 
       sudo snap alias nano-strict nano
 
